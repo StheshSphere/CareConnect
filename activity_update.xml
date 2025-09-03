@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:padding="24dp"
+    tools:context=".UpdateActivity">
+
+  <!-- Title -->
+  <TextView
+      android:id="@+id/updateTitle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Update Profile"
+      android:textSize="28sp"
+      android:textStyle="bold"
+      android:textColor="#000000"
+      android:fontFamily="@font/courgette_regular"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"/>
+
+  <!-- Contact Details Card -->
+  <androidx.cardview.widget.CardView
+      android:id="@+id/contactCard"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      app:cardCornerRadius="16dp"
+      app:cardElevation="8dp"
+      app:cardBackgroundColor="#FFFFFF"
+      app:layout_constraintTop_toBottomOf="@id/updateTitle"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Contact Details"
+          android:textSize="20sp"
+          android:textStyle="bold"
+          android:textColor="#000000"
+          android:fontFamily="@font/deliusswashcaps_regular"
+          android:layout_marginBottom="16dp"/>
+
+      <!-- Phone Number Update -->
+      <EditText
+          android:id="@+id/phonenumberUpdate"
+          android:layout_width="match_parent"
+          android:layout_height="56dp"
+          android:layout_marginBottom="16dp"
+          android:background="@drawable/hintbox"
+          android:hint="New phone number"
+          android:inputType="phone"
+          android:padding="12dp"
+          android:textColor="#000000"
+          android:textColorHint="#BBDEFB"
+          android:textSize="16sp" />
+
+      <!-- Update Contact Button -->
+      <Button
+          android:id="@+id/updatecontactbutton"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="UPDATE CONTACT"
+          android:onClick="docontact"
+          android:textColor="#000000"
+          android:textSize="16sp"
+          android:textStyle="bold"
+          android:background="@drawable/rounded_teal_button"
+          android:padding="12dp"
+          android:elevation="4dp"
+          android:fontFamily="@font/deliusswashcaps_regular"/>
+    </LinearLayout>
+  </androidx.cardview.widget.CardView>
+
+  <!-- Bio Update Card -->
+  <androidx.cardview.widget.CardView
+      android:id="@+id/bioCard"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      app:cardCornerRadius="16dp"
+      app:cardElevation="8dp"
+      app:cardBackgroundColor="#FFFFFF"
+      app:layout_constraintTop_toBottomOf="@id/contactCard"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Bio Information"
+          android:textSize="20sp"
+          android:textStyle="bold"
+          android:textColor="#000000"
+          android:fontFamily="@font/deliusswashcaps_regular"
+          android:layout_marginBottom="16dp"/>
+
+      <!-- Bio Update -->
+      <EditText
+          android:id="@+id/boiupdate"
+          android:layout_width="match_parent"
+          android:layout_height="150dp"
+          android:hint="Update your bio"
+          android:textColorHint="#BBDEFB"
+          android:textColor="#000000"
+          android:textSize="16sp"
+          android:background="@drawable/hintbox"
+          android:padding="12dp"
+          android:gravity="top|start"
+          android:inputType="textMultiLine"
+          android:layout_marginBottom="16dp"/>
+
+      <!-- Update Bio Button -->
+      <Button
+          android:id="@+id/updatebiobutton"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="UPDATE BIO"
+          android:onClick="doBio"
+          android:textColor="#000000"
+          android:textSize="16sp"
+          android:textStyle="bold"
+          android:background="@drawable/rounded_teal_button"
+          android:padding="12dp"
+          android:elevation="4dp"
+          android:fontFamily="@font/deliusswashcaps_regular"/>
+    </LinearLayout>
+  </androidx.cardview.widget.CardView>
+
+  <!-- Back Button -->
+  <Button
+      android:id="@+id/buttonback"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="BACK"
+      android:onClick="DoBack"
+      android:textColor="#FFFFFF"
+      android:textSize="16sp"
+      android:textStyle="bold"
+      android:background="@drawable/rounded_dark_button"
+      android:paddingLeft="32dp"
+      android:paddingRight="32dp"
+      android:elevation="4dp"
+      android:fontFamily="@font/deliusswashcaps_regular"
+      app:layout_constraintTop_toBottomOf="@id/bioCard"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:layout_marginTop="24dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
