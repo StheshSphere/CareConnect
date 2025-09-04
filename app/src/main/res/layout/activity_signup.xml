@@ -15,19 +15,20 @@
         <!-- Logo -->
         <ImageView
             android:id="@+id/imgLogo"
-            android:layout_width="274dp"
-            android:layout_height="103dp"
+            android:layout_width="334dp"
+            android:layout_height="122dp"
+            android:layout_marginTop="72dp"
             android:layout_marginBottom="16dp"
             android:adjustViewBounds="true"
             android:contentDescription="CareConnect Logo"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/careconnect"/>
+            app:srcCompat="@drawable/careconnect" />
 
         <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login here"
+            android:text="Signup here"
             android:textSize="25sp"
             android:textStyle="bold"
             android:fontFamily="@font/fredoka_bold"
@@ -129,6 +130,11 @@
         </com.google.android.material.textfield.TextInputLayout>
         <!-- Forgot password -->
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <!-- Sign up button -->
         <Button
             android:id="@+id/btnSignUp"
@@ -166,7 +172,7 @@
 
         <!-- Create account -->
         <TextView
-            android:id="@+id/txtCreateAccount"
+            android:id="@+id/txtLoginHere"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Already have an account? Login"

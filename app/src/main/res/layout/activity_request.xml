@@ -9,40 +9,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
         <!-- App Logo -->
         <ImageView
             android:id="@+id/imgLogo"
             android:layout_width="wrap_content"
             android:layout_height="158dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="32dp"
+            android:layout_marginTop="74dp"
             android:adjustViewBounds="true"
             android:contentDescription="App Logo"
             android:scaleType="fitCenter"
             android:src="@drawable/careconnect" />
 
-        <!-- View Match Button -->
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Titles -->
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_marginBottom="24dp">
+            android:text="Request"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/fredoka_bold"
+            android:textColor="@color/primary_blue"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"/>
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/google_button"
-                android:text="View your match"
-                android:textColor="@color/white"
-                android:fontFamily="@font/fredoka_medium"
-                android:textSize="14sp"
-                />
-
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Request the items you need"
+            android:textSize="16sp"
+            android:fontFamily="@font/fredoka_bold"
+            android:textColor="@color/grey"
+            android:gravity="center"/>
+        <!-- View Your Match Button -->
+        <Button
+            android:id="@+id/btnViewMatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View your match"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/primary_blue"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/fredoka_medium"
+            android:textSize="16sp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rounded_outline"
+            />
 
         <!-- Main Content Card -->
         <LinearLayout
@@ -54,94 +68,7 @@
             android:background="@drawable/rounded_card"
             android:padding="16dp">
 
-            <!-- Select Category Section -->
-            <TextView
-                android:id="@+id/tvCategoryTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Select Category"
-                android:textColor="@color/primary_blue"
-                android:textSize="18sp"
-                android:fontFamily="@font/fredoka_medium"
-                android:layout_marginBottom="8dp"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp">
-
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="25dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="2dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/light_grey"
-                    android:fontFamily="@font/fredoka_semibold"
-                    android:text="Food"
-                    android:textColor="@color/primary_blue"
-                    android:textSize="9sp"
-                    app:cornerRadius="12dp"
-                    app:icon="@drawable/food"
-                    app:iconGravity="textStart"
-                    app:iconSize="18dp"
-                    app:iconTint="@color/primary_blue" />
-
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="46dp"
-                    android:layout_height="48dp"
-                    android:layout_marginHorizontal="2dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/light_grey"
-                    android:fontFamily="@font/fredoka_semibold"
-                    android:text="Clothing"
-                    android:textColor="@color/primary_blue"
-                    android:textSize="9sp"
-                    app:cornerRadius="12dp"
-                    app:icon="@drawable/clothing"
-                    app:iconGravity="textStart"
-                    app:iconSize="18dp"
-                    app:iconTint="@color/primary_blue" />
-
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="39dp"
-                    android:layout_height="48dp"
-                    android:layout_marginHorizontal="2dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/light_grey"
-                    android:fontFamily="@font/fredoka_semibold"
-                    android:text="Hygiene"
-                    android:textColor="@color/primary_blue"
-                    android:textSize="9sp"
-                    app:cornerRadius="12dp"
-                    app:icon="@drawable/hygiene"
-                    app:iconGravity="textStart"
-                    app:iconSize="18dp"
-                    app:iconTint="@color/primary_blue" />
-
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="7dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="2dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/light_grey"
-                    android:fontFamily="@font/fredoka_semibold"
-                    android:text="Other"
-                    android:textColor="@color/primary_blue"
-                    android:textSize="9sp"
-                    app:cornerRadius="12dp"
-                    app:iconGravity="textStart"
-                    app:iconSize="18dp"
-                    app:iconTint="@color/primary_blue" />
-
-            </LinearLayout>
-
-            <!-- Select Item Section -->
+            <!-- Select Item Spinner -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -149,53 +76,51 @@
                 android:textColor="@color/primary_blue"
                 android:textSize="16sp"
                 android:fontFamily="@font/fredoka_medium"
-                android:layout_marginBottom="8dp"
-                />
+                android:layout_marginBottom="8dp"/>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <Spinner
+                android:id="@+id/spinnerItems"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                app:startIconDrawable="@android:drawable/ic_menu_search"
+                android:backgroundTint="@color/light_grey"
+                android:spinnerMode="dropdown"/>
+
+            <!-- EditText for custom item -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutCustomItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCustomItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Search"
+                    android:hint="Enter item name"
                     android:textColorHint="@color/grey"
                     android:textColor="@color/grey"
-                    android:fontFamily="@font/fredoka_regular" />
+                    android:fontFamily="@font/fredoka_regular"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="+ Add New Item"
-                android:backgroundTint="@color/light_grey"
-                android:textColor="@color/primary_blue"
-                android:fontFamily="@font/fredoka_medium"
-                android:textSize="14sp"
-                />
-
-            <!-- Quantity & Details Section -->
+            <!-- Quantity Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Quantity &amp; Details"
+                android:text="Quantity"
                 android:textColor="@color/primary_blue"
                 android:textSize="16sp"
                 android:fontFamily="@font/fredoka_medium"
-                android:layout_marginBottom="8dp"
-                />
+                android:layout_marginBottom="8dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="16dp">
 
                 <Button
                     android:id="@+id/btnMinus"
@@ -237,60 +162,27 @@
                     android:fontFamily="@font/fredoka_regular"/>
             </LinearLayout>
 
+            <!-- Optional Condition -->
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutCondition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCondition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Condition (optional)"
+                    android:hint="Dietary preferences (optional)"
                     android:textColorHint="@color/primary_blue"
                     android:textColor="@color/primary_blue"
                     android:fontFamily="@font/fredoka_regular" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Delivery Method Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delivery Method"
-                android:textColor="@color/primary_blue"
-                android:textSize="16sp"
-                android:fontFamily="@font/fredoka_medium"
-                android:layout_marginBottom="8dp"
-                />
-
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp">
-
-                <RadioButton
-                    android:id="@+id/rbDropOff"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Drop-off at center"
-                    android:checked="true"
-                    android:textColor="@color/primary_blue"
-                    android:fontFamily="@font/fredoka_regular" />
-
-                <RadioButton
-                    android:id="@+id/rbDonorDelivery"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Donor delivery"
-                    android:textColor="@color/primary_blue"
-                    android:fontFamily="@font/fredoka_regular" />
-            </RadioGroup>
-
             <!-- Request Button -->
             <Button
+                android:id="@+id/btnRequest"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:text="Request"
@@ -299,10 +191,7 @@
                 android:fontFamily="@font/fredoka_medium"
                 android:background="@drawable/rounded_outline"
                 android:textSize="16sp"
-                android:letterSpacing="0.02"
-                />
-
+                android:letterSpacing="0.02"/>
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>
