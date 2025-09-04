@@ -2,9 +2,9 @@ package com.stheshsphere.careconnect;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -22,72 +22,65 @@ import java.util.Map;
 
 public class RequestActivity extends AppCompatActivity {
 
-    private Spinner spinnerItems;
-    private TextInputLayout layoutCustomItem, layoutCondition;
-    private TextInputEditText etCustomItem, etCondition;
-    private TextView tvQuantity;
-    private Button btnMinus, btnPlus, btnRequest, btnViewMatch;
+    Spinner spinnerItems;
+    TextInputLayout layoutCustomItem, layoutCondition;
+    TextInputEditText etCustomItem, etCondition;
+    TextView tvQuantity;
+    Button btnMinus, btnPlus, btnRequest, btnViewMatch;
+    int quantity = 1;
 
-    private int quantity = 1;
+    FirebaseFirestore db;
+    FirebaseAuth auth;
+    FirebaseUser currentUser;
 
-    private FirebaseAuth auth;
-    private FirebaseUser user;
-    private FirebaseFirestore db;
-
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request);
 
-        // Initialize Firebase
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
+        // Firebase
         db = FirebaseFirestore.getInstance();
-
-        if (user == null) {
-            Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
+        auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
 
         // Initialize views
         spinnerItems = findViewById(R.id.spinnerItems);
         layoutCustomItem = findViewById(R.id.layoutCustomItem);
         etCustomItem = findViewById(R.id.etCustomItem);
-        layoutCondition = findViewById(R.id.layoutCondition); // Assuming you added an ID in XML
-        etCondition = findViewById(R.id.etCondition);          // Assuming you added an ID in XML
+        layoutCondition = findViewById(R.id.layoutCondition);
+        etCondition = findViewById(R.id.etCondition);
+
         tvQuantity = findViewById(R.id.tvQuantity);
         btnMinus = findViewById(R.id.btnMinus);
         btnPlus = findViewById(R.id.btnPlus);
         btnRequest = findViewById(R.id.btnRequest);
         btnViewMatch = findViewById(R.id.btnViewMatch);
 
-        // Load spinner items
-        String[] items = {"Rice", "Beans", "Clothes", "Soap", "Other"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, items);
+        // Populate spinner with items
+        String[] items = {"Rice", "Beans", "Bread", "Milk", "Other"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerItems.setAdapter(adapter);
 
-        // Show/hide custom item EditText
-        spinnerItems.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
+        // Show/hide custom item input
+        spinnerItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(android.widget.AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selected = spinnerItems.getSelectedItem().toString();
                 if (selected.equals("Other")) {
                     layoutCustomItem.setVisibility(View.VISIBLE);
                 } else {
                     layoutCustomItem.setVisibility(View.GONE);
-                    etCustomItem.setText(""); // Clear previous input
                 }
             }
 
             @Override
-            public void onNothingSelected(android.widget.AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+                layoutCustomItem.setVisibility(View.GONE);
+            }
         });
 
-        // Quantity buttons
+        // Quantity increment/decrement
         btnMinus.setOnClickListener(v -> {
             if (quantity > 1) {
                 quantity--;
@@ -100,51 +93,52 @@ public class RequestActivity extends AppCompatActivity {
             tvQuantity.setText(String.valueOf(quantity));
         });
 
-        // Request button
-        btnRequest.setOnClickListener(v -> {
-            String item = spinnerItems.getSelectedItem().toString();
-            if (item.equals("Other")) {
-                item = etCustomItem.getText().toString().trim();
-                if (item.isEmpty()) {
-                    etCustomItem.setError("Enter item name");
-                    etCustomItem.requestFocus();
-                    return;
-                }
-            }
+        // Handle request button click
+        btnRequest.setOnClickListener(v -> sendRequest());
 
-            String condition = etCondition.getText().toString().trim();
-
-            // Create request map
-            Map<String, Object> request = new HashMap<>();
-            request.put("userId", user.getUid());
-            request.put("itemName", item);
-            request.put("quantity", quantity);
-            request.put("condition", condition.isEmpty() ? "N/A" : condition);
-            request.put("timestamp", System.currentTimeMillis());
-
-            // Save to Firestore
-            db.collection("requests")
-                    .add(request)
-                    .addOnSuccessListener(documentReference -> {
-                        Toast.makeText(RequestActivity.this,
-                                "Request submitted successfully!", Toast.LENGTH_SHORT).show();
-                        // Reset form
-                        spinnerItems.setSelection(0);
-                        etCustomItem.setText("");
-                        etCondition.setText("");
-                        quantity = 1;
-                        tvQuantity.setText(String.valueOf(quantity));
-                        layoutCustomItem.setVisibility(View.GONE);
-                    })
-                    .addOnFailureListener(e -> Toast.makeText(RequestActivity.this,
-                            "Failed to submit request: " + e.getMessage(), Toast.LENGTH_LONG).show());
-        });
-
-        // View your match button
+        // TODO: btnViewMatch click logic
         btnViewMatch.setOnClickListener(v -> {
-            // TODO: Navigate to match page
-            Toast.makeText(RequestActivity.this,
-                    "View your match clicked", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "View match clicked (logic not implemented yet)", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    private void sendRequest() {
+        if (currentUser == null) {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String selectedItem = spinnerItems.getSelectedItem().toString();
+        String customItem = etCustomItem.getText() != null ? etCustomItem.getText().toString().trim() : "";
+        String condition = etCondition.getText() != null ? etCondition.getText().toString().trim() : "";
+
+        if (selectedItem.equals("Other") && customItem.isEmpty()) {
+            etCustomItem.setError("Please enter item name");
+            etCustomItem.requestFocus();
+            return;
+        }
+
+        // Prepare data
+        Map<String, Object> request = new HashMap<>();
+        request.put("userId", currentUser.getUid());
+        request.put("item", selectedItem.equals("Other") ? customItem : selectedItem);
+        request.put("quantity", quantity);
+        request.put("condition", condition);
+
+        // Save to Firestore (collection: "requests")
+        db.collection("requests").add(request)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Request submitted successfully!", Toast.LENGTH_SHORT).show();
+                    // Reset form
+                    spinnerItems.setSelection(0);
+                    etCustomItem.setText("");
+                    layoutCustomItem.setVisibility(View.GONE);
+                    etCondition.setText("");
+                    quantity = 1;
+                    tvQuantity.setText(String.valueOf(quantity));
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to submit request: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 }
