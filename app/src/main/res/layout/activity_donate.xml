@@ -9,79 +9,197 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
+        <!-- App Logo -->
         <ImageView
             android:id="@+id/imgLogo"
             android:layout_width="wrap_content"
             android:layout_height="158dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginTop="74dp"
             android:adjustViewBounds="true"
             android:contentDescription="App Logo"
             android:scaleType="fitCenter"
             android:src="@drawable/careconnect" />
 
-        <!-- Category -->
-        <Spinner
-            android:id="@+id/spinnerCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- Item Name -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+        <!-- Titles -->
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Item Name">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etItemName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Quantity -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Quantity"
-            android:layout_marginTop="12dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etQuantity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Notes -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Additional Notes"
-            android:layout_marginTop="12dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etNotes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Submit -->
-        <Button
-            android:id="@+id/btnSubmitDonation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Submit donation"
-            android:textColor="@color/white"
-            android:fontFamily="@font/fredoka_regular"
-            android:drawableStart="@drawable/google"
-            android:drawablePadding="8dp"
-            android:background="@drawable/google_button"
-            android:padding="12dp"
-            android:layout_marginBottom="24dp"
+            android:text="Donate"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/fredoka_bold"
+            android:textColor="@color/primary_blue"
+            android:layout_marginBottom="8dp"
             android:gravity="center"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offer items to those in need"
+            android:textSize="16sp"
+            android:fontFamily="@font/fredoka_bold"
+            android:textColor="@color/grey"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Main Content Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:elevation="4dp"
+            android:clipToOutline="true"
+            android:background="@drawable/rounded_card"
+            android:padding="16dp">
+
+            <!-- Select Item Spinner -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Item"
+                android:textColor="@color/primary_blue"
+                android:textSize="16sp"
+                android:fontFamily="@font/fredoka_medium"
+                android:layout_marginBottom="8dp"/>
+
+            <Spinner
+                android:id="@+id/spinnerItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/light_grey"
+                android:spinnerMode="dropdown"/>
+
+            <!-- EditText for custom item -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutCustomItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCustomItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter item name"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/grey"
+                    android:fontFamily="@font/fredoka_regular"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Quantity Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Quantity"
+                android:textColor="@color/primary_blue"
+                android:textSize="16sp"
+                android:fontFamily="@font/fredoka_medium"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <Button
+                    android:id="@+id/btnMinus"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:text="-"
+                    android:textSize="20sp"
+                    android:backgroundTint="@color/light_grey"
+                    android:textColor="@color/primary_blue"
+                    android:fontFamily="@font/fredoka_medium"/>
+
+                <TextView
+                    android:id="@+id/tvQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:layout_margin="16dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/grey"
+                    android:fontFamily="@font/fredoka_medium"/>
+
+                <Button
+                    android:id="@+id/btnPlus"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:text="+"
+                    android:textSize="20sp"
+                    android:backgroundTint="@color/light_grey"
+                    android:textColor="@color/primary_blue"
+                    android:fontFamily="@font/fredoka_medium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="units"
+                    android:layout_marginStart="8dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/grey"
+                    android:fontFamily="@font/fredoka_regular"/>
+            </LinearLayout>
+
+            <!-- Optional Condition -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutCondition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCondition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Condition (optional)"
+                    android:textColorHint="@color/primary_blue"
+                    android:textColor="@color/primary_blue"
+                    android:fontFamily="@font/fredoka_regular" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Image Upload -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Image (optional)"
+                android:textColor="@color/primary_blue"
+                android:textSize="16sp"
+                android:fontFamily="@font/fredoka_medium"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/btnUploadImage"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Select Image"
+                android:backgroundTint="@color/light_grey"
+                android:textColor="@color/primary_blue"
+                android:fontFamily="@font/fredoka_medium"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Donate Button -->
+            <Button
+                android:id="@+id/btnDonate"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Donate"
+                android:backgroundTint="@color/primary_blue"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/fredoka_medium"
+                android:background="@drawable/rounded_outline"
+                android:textSize="16sp"
+                android:letterSpacing="0.02"/>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
