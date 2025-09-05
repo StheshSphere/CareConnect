@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "44355830500-rgkqu7t7c8br71eguev0hosdtpar7n9n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.stheshsphere.careconnect",
+            "certificate_hash": "4e77cec6269fa62d21a012b2a5399c774f70b104"
+          }
+        },
+        {
           "client_id": "44355830500-kvif29sahe3jm5htafjs1qj4libsjto3.apps.googleusercontent.com",
           "client_type": 3
         }
